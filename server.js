@@ -19,23 +19,28 @@ const router = express.Router() //criando a instância das rotas via express
 const Produto = require('./app/models/produto')
 
 //conecta com o mongodb cloud
-mongoose.connect('mongodb+srv://dbVinicius:<123123>@cluster0-59tb7.mongodb.net/test?retryWrites=true', { useNewUrlParser: true})
+mongoose.connect('mongodb+srv://dbVinicius:<Viniciusdfran123>@cluster0-59tb7.mongodb.net/test?retryWrites=true',
+    { useNewUrlParser: true
+})
 
 //configuração da variavel app para usar o 'bodyParser()'
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-
-app.get('/', (req, res) => {
-          
+//========================================//
+/**Rotas da API */
+router.use('/', (req, res, next) => {
+    console.log('TA TENU AQUI!.....')
+    next()
 })
-
-
-//rota de exemplo 
+router.get('/', (req, res, next) =>{
+    res.json({ message: 'Bem vindo ao App'})
+})
+//============== API's ================//
 router.get('/', (req, res) =>{
     res.json({ message: 'Bem vindo ao App'})
 })
-
+//========================================//
 
 //definindo padrão das rotas prefixadas: /api -> http://localhost:PORT/api/
 app.use('/api', router)
